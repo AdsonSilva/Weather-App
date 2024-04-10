@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,8 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.weatherapp.ui.theme.WeatherAppTheme
+import com.example.weatherapp.viewmodel.WeatherViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class MainActivity : ComponentActivity() {
+
+    private val weatherViewModel: WeatherViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -26,6 +31,8 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        weatherViewModel.getWeather()
     }
 }
 

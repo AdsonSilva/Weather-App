@@ -1,5 +1,6 @@
 package com.example.weatherapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,6 +22,7 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
                 try {
                     val result = weatherRepository.getWeather()
                     weather.postValue(result)
+                    Log.i("WEATHER", "getWeather: $result")
                 } catch (throwable: Throwable) {
                     when(throwable) {
                         is IOException -> {

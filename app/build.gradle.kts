@@ -63,6 +63,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson.converter)
     implementation(libs.gson)
+    implementation(libs.loggin)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
 
 
 
