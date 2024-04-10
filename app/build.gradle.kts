@@ -66,6 +66,10 @@ dependencies {
     implementation(libs.loggin)
     implementation(libs.koin.core)
     implementation(libs.koin.android)
+    implementation(libs.compose.viewmodel)
+    implementation(libs.compose.constraintlayout)
+    implementation(libs.compose.material)
+    implementation(libs.lottie)
 
 
 

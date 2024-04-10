@@ -3,6 +3,7 @@ package com.example.weatherapp
 import com.example.weatherapp.model.WeatherRepository
 import com.example.weatherapp.model.WeatherService
 import com.example.weatherapp.viewmodel.WeatherViewModel
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -32,9 +33,11 @@ val serviceModule = module {
                     HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
                 )
 
+        val gsonDateFormat = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create()
+
         Retrofit.Builder()
             .baseUrl("http://api.weatherstack.com/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gsonDateFormat))
             .client(client.build())
             .build().create(WeatherService::class.java)
     }
