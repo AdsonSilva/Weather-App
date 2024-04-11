@@ -3,7 +3,7 @@ package com.example.weatherapp.view
 import com.example.weatherapp.R
 
 enum class WeatherAnimations(val codes: Set<Int>, val animationDay: Int, val animationNight: Int) {
-    SUNNY(setOf(113), R.raw.sunny, R.raw.sunny),
+    SUNNY(setOf(113), R.raw.sunny_day, R.raw.sunny_night),
     CLOUDY(setOf(116, 119), R.raw.cloudy_day, R.raw.cloudy_night),
     FOG(setOf(143, 248, 260), R.raw.fog_day, R.raw.fog_night),
     OVERCAST(setOf(112), R.raw.overcast, R.raw.overcast),

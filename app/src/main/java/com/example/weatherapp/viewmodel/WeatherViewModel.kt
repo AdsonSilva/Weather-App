@@ -50,7 +50,7 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
         }
     }
 
-    fun getLottieAnimation(): Int {
+    fun getLottieAnimations(): Pair<Int, Int> {
         val weatherCode = weather.value?.current?.weatherCode
         val hour = weather.value?.location?.localtime?.hours ?: 0
 
@@ -58,9 +58,9 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
 
         val isNight = (hour > 17 || hour < 4)
         return if (isNight){
-            weatherAnimation.animationNight
+            Pair(weatherAnimation.animationNight, R.raw.night_background)
         } else {
-            weatherAnimation.animationDay
+            Pair(weatherAnimation.animationDay, R.raw.day_background)
         }
     }
 }

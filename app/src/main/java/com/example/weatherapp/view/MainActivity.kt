@@ -42,7 +42,6 @@ class MainActivity : ComponentActivity() {
     private val weatherViewModel: WeatherViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        weatherViewModel.getWeather()
         setContent {
             WeatherAppTheme {
                 // A surface container using the 'background' color from the theme
@@ -50,10 +49,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CurrentWeather(weatherViewModel)
+                    CurrentWeather(weatherViewModel = weatherViewModel)
                 }
             }
         }
+
+        weatherViewModel.getWeather()
     }
 }
 
@@ -61,7 +62,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     WeatherAppTheme {
-        CurrentWeather()
+        CurrentWeather(viewModel())
     }
 }
 
@@ -106,7 +107,7 @@ fun CurrentWeather(
             )
 
             val composition by rememberLottieComposition(
-                spec = LottieCompositionSpec.RawRes(weatherViewModel.getLottieAnimation())
+                spec = LottieCompositionSpec.RawRes(weatherViewModel.getLottieAnimations().first)
             )
             val progress by animateLottieCompositionAsState(
                 composition = composition,

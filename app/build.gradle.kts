@@ -38,7 +38,9 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
@@ -69,7 +71,13 @@ dependencies {
     implementation(libs.compose.viewmodel)
     implementation(libs.compose.constraintlayout)
     implementation(libs.compose.material)
+    implementation(libs.lottie.compose)
     implementation(libs.lottie)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.swiperefresh)
 
 
 
@@ -82,4 +90,6 @@ dependencies {
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+
 }

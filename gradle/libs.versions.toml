@@ -17,6 +17,12 @@ composeViewModel = "2.7.0"
 composeConstraintLayout = "1.0.1"
 composeMaterial = "1.6.5"
 lottieFiles = "6.0.0"
+lottie = "6.4.0"
+appcompat = "1.6.1"
+material = "1.11.0"
+activity = "1.8.2"
+constraintlayout = "2.1.4"
+swipeRefresh = "1.2.0-alpha01"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,9 +49,14 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = 
 compose-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "composeViewModel"}
 compose-constraintlayout =  { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "composeConstraintLayout"}
 compose-material = { group =  "androidx.compose.material", name = "material", version.ref = "composeMaterial"}
-lottie = {group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottieFiles"}
+lottie-compose = {group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottieFiles"}
+lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie"}
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
-
+swiperefresh = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swipeRefresh" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
