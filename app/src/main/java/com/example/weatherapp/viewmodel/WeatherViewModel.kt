@@ -12,8 +12,6 @@ import com.example.weatherapp.view.WeatherAnimations
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.IOException
-import retrofit2.HttpException
 
 
 class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewModel() {

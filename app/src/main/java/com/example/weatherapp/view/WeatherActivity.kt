@@ -3,7 +3,6 @@ package com.example.weatherapp.view
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
-import android.content.pm.PackageManager
 import android.content.pm.PackageManager.*
 import android.os.Bundle
 import android.view.View
@@ -31,6 +30,11 @@ class WeatherActivity : AppCompatActivity() {
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
 
     private lateinit var binding: ActivityWeatherBinding
+
+    private val temperatureMeasure = "º C"
+    private val windMeasure = " km/h"
+    private val percentage = "%"
+    private val requestPermissionCode = 101
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -89,10 +93,10 @@ class WeatherActivity : AppCompatActivity() {
     private fun updateScreen() {
 
         val dateText = SimpleDateFormat("EEEE HH:mm", Locale.ENGLISH).format(viewModel.weather.value?.location?.localtime?.time)
-        val temperatureTex = viewModel.weather.value?.current?.temperature.toString() + "º C"
-        val humidityText = viewModel.weather.value?.current?.humidity.toString() + "%"
-        val windSpeedText = viewModel.weather.value?.current?.windSpeed.toString() + " km/h"
-        val feelsLikeText = viewModel.weather.value?.current?.feelslike.toString() + "º C"
+        val temperatureTex = viewModel.weather.value?.current?.temperature.toString() + temperatureMeasure
+        val humidityText = viewModel.weather.value?.current?.humidity.toString() + percentage
+        val windSpeedText = viewModel.weather.value?.current?.windSpeed.toString() + windMeasure
+        val feelsLikeText = viewModel.weather.value?.current?.feelslike.toString() + temperatureMeasure
 
         val animations = viewModel.getLottieAnimations()
 
@@ -123,7 +127,11 @@ class WeatherActivity : AppCompatActivity() {
             ActivityCompat.checkSelfPermission(this, ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED
         ) {
             binding.swipeRefresh.isRefreshing = false
-            ActivityCompat.requestPermissions(this, arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION), 101)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION),
+                requestPermissionCode
+            )
         }
     }
 
@@ -133,7 +141,9 @@ class WeatherActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == 101 && grantResults.isNotEmpty() && grantResults[0] == PERMISSION_GRANTED) {
+        if(requestCode == requestPermissionCode && grantResults.isNotEmpty() &&
+            grantResults[0] == PERMISSION_GRANTED) {
+
             refreshWeather()
         }
     }

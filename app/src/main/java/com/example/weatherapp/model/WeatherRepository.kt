@@ -1,6 +1,11 @@
 package com.example.weatherapp.model
 
+import com.example.weatherapp.BuildConfig
+
+
+
+
 class WeatherRepository(private val weatherService: WeatherService) {
 
-    suspend fun getWeather(query: String) = weatherService.getWeather("c2e048ffb0a4932392398024a95cc6b3", query)
+    suspend fun getWeather(query: String) = weatherService.getWeather(BuildConfig.API_KEY, query)
 }
