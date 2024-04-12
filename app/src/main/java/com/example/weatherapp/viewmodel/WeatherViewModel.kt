@@ -60,4 +60,8 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
         }
     }
 
+    fun setError() {
+        _error.postValue(true)
+    }
+
 }

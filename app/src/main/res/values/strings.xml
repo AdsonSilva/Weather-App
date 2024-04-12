@@ -5,5 +5,5 @@
     <string name="feels_like">Feels Like</string>
     <string name="input_city_hint">Search for a city name</string>
     <string name="search_icon_content_description">Search for a city</string>
-    <string name="error_message">Sorry, we could not get the weather for this city.\nTry to refresh the page</string>
+    <string name="error_message">Sorry, we could not get the weather for this city.\nTry to refresh the page \n Check if your location service is enabled</string>
 </resources>

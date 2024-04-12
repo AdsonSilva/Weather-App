@@ -18,6 +18,8 @@ import com.example.weatherapp.databinding.ActivityWeatherBinding
 import com.example.weatherapp.viewmodel.WeatherViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationTokenSource
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -85,8 +87,14 @@ class WeatherActivity : AppCompatActivity() {
         binding.swipeRefresh.isRefreshing = true
         checkLocationPermission()
 
-        mFusedLocationClient.lastLocation.addOnSuccessListener {
-            viewModel.getWeather(it.latitude, it.longitude)
+        val cancellationTokenSource = CancellationTokenSource()
+
+        mFusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, cancellationTokenSource.token).addOnSuccessListener {
+            if(it == null) {
+                viewModel.setError()
+            } else {
+                viewModel.getWeather(it.latitude, it.longitude)
+            }
         }
     }
 
