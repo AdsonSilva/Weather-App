@@ -1,9 +1,7 @@
 package com.example.weatherapp.viewmodel
 
 import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,39 +18,39 @@ import retrofit2.HttpException
 
 class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewModel() {
 
-    val weather = MutableLiveData<WeatherDTO>()
+    private val _weather = MutableLiveData<WeatherDTO>()
+    val weather: LiveData<WeatherDTO> = _weather
 
-    var isRefreshing by mutableStateOf(false)
+    private val _error = MutableLiveData<Boolean>(false)
+    val error: LiveData<Boolean> = _error
 
-    fun getWeather() {
+
+    fun getWeather(latitude: Double, longitude: Double) {
+        val query = "$latitude,$longitude"
+        getWeather(query)
+    }
+    fun getWeather(query: String) {
         viewModelScope.launch {
-            isRefreshing = true
             withContext(Dispatchers.IO) {
                 try {
-                    val result = weatherRepository.getWeather()
-                    weather.postValue(result)
-                    isRefreshing = false
-                    Log.i("WEATHER", "getWeather: $result")
-                } catch (throwable: Throwable) {
-                    when(throwable) {
-                        is IOException -> {
-                            isRefreshing = false
-                        }
-                        is HttpException -> {
-                            isRefreshing = false
-                        }
-                        else -> {
-                            isRefreshing = false
-                        }
+                    val result = weatherRepository.getWeather(query)
+                    if(result.location != null) {
+                        _weather.postValue(result)
+                        _error.postValue(false)
+                        Log.i("WEATHER", "getWeather: $result")
+                    } else {
+                        _error.postValue(true)
                     }
+                } catch (throwable: Throwable) {
+                    _error.postValue(true)
                 }
             }
         }
     }
 
     fun getLottieAnimations(): Pair<Int, Int> {
-        val weatherCode = weather.value?.current?.weatherCode
-        val hour = weather.value?.location?.localtime?.hours ?: 0
+        val weatherCode = _weather.value?.current?.weatherCode
+        val hour = _weather.value?.location?.localtime?.hours ?: 0
 
         val weatherAnimation = WeatherAnimations.getAnimationFromCode(weatherCode)
 
@@ -63,4 +61,5 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
             Pair(weatherAnimation.animationDay, R.raw.day_background)
         }
     }
+
 }

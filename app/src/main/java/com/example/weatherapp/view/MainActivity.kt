@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        weatherViewModel.getWeather()
+        weatherViewModel.getWeather(0.0, 0.0)
     }
 }
 
@@ -75,8 +75,8 @@ fun CurrentWeather(
 ) {
 
     val pullRefreshState = rememberPullRefreshState(
-        refreshing = weatherViewModel.isRefreshing,
-        onRefresh = { weatherViewModel.getWeather() }
+        refreshing = true,
+        onRefresh = { weatherViewModel.getWeather(0.0, 0.0) }
     )
 
     Box(Modifier.pullRefresh(pullRefreshState)){
@@ -147,7 +147,7 @@ fun CurrentWeather(
         }
         PullRefreshIndicator(
             modifier = Modifier.align(Alignment.TopCenter),
-            refreshing = weatherViewModel.isRefreshing,
+            refreshing = true,
             state = pullRefreshState
         )
     }

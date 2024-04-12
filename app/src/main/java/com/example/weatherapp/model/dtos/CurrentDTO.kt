@@ -12,7 +12,7 @@ data class CurrentDTO(
     @SerializedName("wind_degree") val windDegree: Int,
     @SerializedName("wind_dir") val windDir: String,
     @SerializedName("pressure") val pressure: Int,
-    @SerializedName("precip") val precipitationLevel: Int,
+    @SerializedName("precip") val precipitationLevel: Double,
     @SerializedName("humidity") val humidity: Int,
     @SerializedName("cloudcover") val cloudcover: Int,
     @SerializedName("feelslike") val feelslike: Int,
